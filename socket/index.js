@@ -10,7 +10,7 @@ const io = new Server(9000, {
 let users = [];
 
 const addUser = (userData, socketId) => {
-    !users.some(user => user._id=== userData._id) && users.push({ ...userData, socketId });
+    !users.some(user => user?._id=== userData?._id) && users.push({ ...userData, socketId });
 }
 
 const removeUser = (socketId) => {
@@ -18,7 +18,7 @@ const removeUser = (socketId) => {
 }
 
 const getUser = (userId) => {
-    return users.find(user => user._id === userId);
+    return users.find(user => user?._id === userId);
 }
 
 io.on('connection',  (socket) => {

@@ -15,7 +15,7 @@ export const addUser = async (data) => {
 export const getAllUsers = async (account) => {
     try {
         let response = await axios.get(`${url}api/users`);
-        let index=response.data.findIndex((user)=>user._id === account._id)
+        let index=response.data.findIndex((user)=>user?._id === account?._id)
          response.data.splice(index, 1);
         return response.data;
     } catch (error) {
