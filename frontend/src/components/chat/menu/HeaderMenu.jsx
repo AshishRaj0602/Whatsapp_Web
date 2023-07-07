@@ -5,9 +5,6 @@ import { MoreVert } from '@mui/icons-material';
 import { Menu, MenuItem, styled } from '@mui/material';
 
 import { AccountContext } from '../../../context/AccountProvider';
-import { UserContext } from '../../../context/UserProvider.jsx';
-
-import { clientId } from '../../../constants/data';
 
 //components
 import InfoDrawer from '../../drawer/Drawer';
@@ -28,8 +25,7 @@ const HeaderMenu = () => {
     const [open, setOpen] = useState(false);
     const [openDrawer, setOpenDrawer] = useState(false);
     
-    const { setAccount, setShowloginButton, showlogoutButton, setShowlogoutButton } = useContext(AccountContext);
-    const { setPerson } = useContext(UserContext);
+    const {  showlogoutButton } = useContext(AccountContext);
 
 
     const handleClick = (event) => {
@@ -40,14 +36,7 @@ const HeaderMenu = () => {
         setOpen(null);
     };
 
-    const onSignoutSuccess = () => {
-        alert("You have been logged out successfully");
-        console.clear();
-        setShowlogoutButton(false);
-        setShowloginButton(true);
-        setAccount('');
-        setPerson({});
-    };
+    
 
     const toggleDrawer = () => {
         setOpenDrawer(true);

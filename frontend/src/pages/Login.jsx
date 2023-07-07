@@ -12,8 +12,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useSelector,useDispatch } from 'react-redux';
-import { register, setLoading } from '../store/userSlice';
+import { useDispatch } from 'react-redux';
+import { register } from '../store/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { postRequest } from '../utils/services';
 
@@ -57,7 +57,6 @@ const Login = () => {
   const dispatch=useDispatch();
   const Navigate=useNavigate();
   const [inputs,setInputs]=useState({email:"",password:""});
-  const [Error,setError] =useState(false);
   const [ErrorMessage,setErrorMessage] = useState('')
   const navigate = useNavigate();
 
@@ -66,7 +65,7 @@ const handleSubmit =async(e)=>{
   e.preventDefault();
   const res= await postRequest("login",inputs);
  if(res) {
- setError(res.error);
+ 
  setErrorMessage(res.message);
  if(!res.error){
   console.log(res.data)

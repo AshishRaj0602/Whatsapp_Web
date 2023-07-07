@@ -17,7 +17,7 @@ const AccountProvider = ({children}) => {
     useEffect(() => {
         socket.current = io('https://ashish01.onrender.com'); 
         setAccount(user);
-    }, [])
+    }, [user])
 
     return (
         <AccountContext.Provider value={{ 

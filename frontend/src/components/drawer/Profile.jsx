@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { Box, Button, styled, Typography } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../store/userSlice";
