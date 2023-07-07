@@ -1,7 +1,7 @@
   
 import axios from 'axios';
 
-const url = 'http://localhost:8080/';
+const url = 'https://ashish06.onrender.com/';
 
 export const addUser = async (data) => {
     // try {

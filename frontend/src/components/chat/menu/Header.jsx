@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
 import { Box, styled } from '@mui/material';
 import { Chat as MessageIcon } from '@mui/icons-material';

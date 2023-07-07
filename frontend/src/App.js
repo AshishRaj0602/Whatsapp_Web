@@ -1,24 +1,19 @@
 import "./App.css";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import Register from "./pages/SignUp";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
-import NavBar from "./components/NavCompo";
 import { register } from "./store/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import Messenger from "./components/Messenger";
 import SignUp from "./pages/SignUp";
-import UserProvider from "./context/UserProvider";
-import AccountProvider from "./context/AccountProvider";
 import Home from "./pages/Home";
 function App() {
   const dispatch = useDispatch();
-  const navigate=useNavigate();
-  // let user = useSelector((state) => state.user.user);
+  
   let user={};
   useEffect(() => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       user = JSON.parse(localStorage.getItem("User"));
     dispatch(register(user));
   }, []);

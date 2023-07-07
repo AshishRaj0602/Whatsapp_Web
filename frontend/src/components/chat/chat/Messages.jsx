@@ -16,13 +16,7 @@ const Wrapper = styled(Box)`
     background-size: 50%;
 `;
 
-const StyledFooter = styled(Box)`
-    height: 55px;
-    background: #ededed;
-    // position: absolute;
-    width: 100%;
-    // bottom: 0
-`;
+
     
 const Component = styled(Box)`
     height: 80vh;
@@ -55,7 +49,7 @@ const Messages = ({ person, conversation }) => {
                 createdAt: Date.now()
             })
         })
-    }, []);
+    }, [socket]);
     
     useEffect(() => {
         const getMessageDetails = async () => {
@@ -63,7 +57,7 @@ const Messages = ({ person, conversation }) => {
             setMessages(data);
         }
         conversation._id && getMessageDetails();
-    }, [conversation?._id, person?._id, newMessageFlag]);
+    }, [conversation?._id, person?._id, newMessageFlag,setMessages]);
 
     useEffect(() => {
         scrollRef.current?.scrollIntoView({ transition: "smooth" })
@@ -73,7 +67,7 @@ const Messages = ({ person, conversation }) => {
         incomingMessage && conversation?.members?.includes(incomingMessage.senderId) && 
             setMessages((prev) => [...prev, incomingMessage]);
         
-    }, [incomingMessage, conversation]);
+    }, [incomingMessage, conversation,setMessages]);
 
     const receiverId = conversation?.members?.find(member => member !== account._id);
     

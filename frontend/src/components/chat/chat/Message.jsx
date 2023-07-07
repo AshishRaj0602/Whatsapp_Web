@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 
 import { Box, styled, Typography } from '@mui/material';
 import { GetApp as GetAppIcon } from '@mui/icons-material';

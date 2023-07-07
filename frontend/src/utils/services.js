@@ -1,5 +1,5 @@
 import axios from "axios";
-export const baseUrl = "http://localhost:8080/api";
+export const baseUrl = "https://ashish06.onrender.com/api";
 
 export const postRequest = async (url, body) => {
   try {

@@ -1,6 +1,6 @@
 const grid =require('gridfs-stream');
 const mongoose =require('mongoose');
-const url = 'http://localhost:8080';
+const url = 'https://ashish06.onrender.com';
 
 
 let gfs, gridfsBucket;
