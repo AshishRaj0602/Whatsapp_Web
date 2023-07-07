@@ -48,15 +48,15 @@ const Footer = ({ sendText, value, setValue, setFile, file, setImage }) => {
                 data.append("file", file);
 
                 const response = await uploadFile(data);
-                setImage(response.data);
+                setImage(response?.data);
             }
         }
         getImage();
     }, [file,setImage])
 
     const onFileChange = (e) => {
-        setValue(e.target.files[0].name);
-        setFile(e.target.files[0]);
+        setValue(e.target?.files[0]?.name);
+        setFile(e.target?.files[0]);
     }
 
     return (
