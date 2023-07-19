@@ -12,10 +12,11 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useDispatch } from 'react-redux';
-import { register } from '../store/userSlice';
+import { useDispatch ,useSelector} from 'react-redux';
+import { register,setLoading } from '../store/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { postRequest } from '../utils/services';
+import Loading from '../components/loading/Loading'
 
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -55,6 +56,7 @@ const Login = () => {
 
 
   const dispatch=useDispatch();
+  const isLoading=useSelector(state=> state?.user?.isLoading)
   const Navigate=useNavigate();
   const [inputs,setInputs]=useState({email:"",password:""});
   const [ErrorMessage,setErrorMessage] = useState('')
@@ -63,7 +65,9 @@ const Login = () => {
 
 const handleSubmit =async(e)=>{
   e.preventDefault();
+  dispatch(setLoading(true));
   const res= await postRequest("login",inputs);
+  dispatch(setLoading(false));
  if(res) {
  
  setErrorMessage(res.message);
@@ -91,7 +95,7 @@ const handleSubmit =async(e)=>{
 
 return (
   <ThemeProvider theme={defaultTheme}>
-    <Container component="main" maxWidth="xs">
+    {isLoading ?<Loading/>:<Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
         sx={{
@@ -142,7 +146,7 @@ return (
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            Login
           </Button>
           <Grid container>
             <Grid item xs>
@@ -159,7 +163,7 @@ return (
         </Box>
       </Box>
       <Copyright sx={{ mt: 8, mb: 4 }} />
-    </Container>
+    </Container>}
   </ThemeProvider>
 );
 }

@@ -13,13 +13,14 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { register, setLoading } from '../store/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { postRequest } from '../utils/services';
 
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import Loading from '../components/loading/Loading';
 
 function Copyright(props) {
 
@@ -41,6 +42,7 @@ const defaultTheme = createTheme();
 
  const  SignUp=()=> {
     const dispatch=useDispatch();
+    const isloading=useSelector(state=> state?.user?.isLoading)
     const [inputs,setInputs]=useState({name:"",email:"",password:""});
     const navigate = useNavigate();
   const handleSubmit =async(e)=>{
@@ -73,7 +75,7 @@ const defaultTheme = createTheme();
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+      {isloading ?<Loading/>:<Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -150,7 +152,7 @@ const defaultTheme = createTheme();
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
+      </Container>}
     </ThemeProvider>
   );
 }
