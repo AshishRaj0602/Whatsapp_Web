@@ -1,16 +1,21 @@
-const {Server} =require('socket.io');
 
-const io = new Server(9000, {
+const {Server} =require('socket.io');
+const http = require('http');
+const port = process.env.PORT || 9000;
+const server = http.createServer();
+const io = new Server(server, {
     cors: {
-        origin: 'https://whatsapp0602.netlify.app/',
+        origin: 'http://localhost:3000',
     }, 
 })
-
+server.listen(port, () => {
+    console.log(`Socket.IO server running on port ${port}`);
+  });
 
 let users = [];
 
 const addUser = (userData, socketId) => {
-    !users.some(user => user?._id=== userData?._id) && users.push({ ...userData, socketId });
+    !users.some(user => user.sub === userData.sub) && users.push({ ...userData, socketId });
 }
 
 const removeUser = (socketId) => {
@@ -18,7 +23,7 @@ const removeUser = (socketId) => {
 }
 
 const getUser = (userId) => {
-    return users.find(user => user?._id === userId);
+    return users.find(user => user.sub === userId);
 }
 
 io.on('connection',  (socket) => {
@@ -33,7 +38,7 @@ io.on('connection',  (socket) => {
     //send message
     socket.on('sendMessage', (data) => {
         const user = getUser(data.receiverId);
-        io.to(user?.socketId).emit('getMessage', data)
+        io.to(user.socketId).emit('getMessage', data)
     })
 
     //disconnect
